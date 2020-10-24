@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jogo da velha</title>
+    <link rel="stylesheet" type="text/css" href="static/css/estilo.css" />
+    <link rel="stylesheet" href="static/font-awesome-4.7.0/css/font-awesome.min.css">
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@1,200&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div id="container">
+        <h1># JOGO DA VELHA #</h1>
+        <div id="bt_iniciar" class="botao" onclick="comecaJogada();">COMEÇAR JOGO!</div>
+
+        <div id="menu">
+            <span><h4>Informações do jogo:</h4></span>
+            <div><b>ID do Jogo:</b> <span class="id_jogo"></span></div>
+            <div><b>Vez do jogador:</b> <span class="jogador_atual"></span></div>
+            <div class="icon"><i class="fa fa-refresh fa-2x" title="Começar jogo novamente" onclick="comecaJogada();" aria-hidden="true"></i></div>
+        </div>
+        <table id="tabuleiro">
+            <tr>
+                <td x="2" y="0" onclick="realizaJogada(this);"></td>
+                <td x="2" y="1" onclick="realizaJogada(this);"></td>
+                <td x="2" y="2" onclick="realizaJogada(this);"></td>
+            </tr>
+            </tr>
+                <td x="1" y="0" onclick="realizaJogada(this);"></td>
+                <td x="1" y="1" onclick="realizaJogada(this);"></td>
+                <td x="1" y="2" onclick="realizaJogada(this);"></td>
+            </tr>
+            <tr>
+                <td x="0" y="0" onclick="realizaJogada(this);"></td>
+                <td x="0" y="1" onclick="realizaJogada(this);"></td>
+                <td x="0" y="2" onclick="realizaJogada(this);"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+<script src="static/js/funcoes.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</html>
