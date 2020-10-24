@@ -1,16 +1,38 @@
 let partida = 0;
-let jogador1 = '';
+let firstPlayer = '';
+let nom_jogador_atual = '';
 let id_partida = '';
 
-function jogadorAtual(jogador1){
-    if(partida % 2 == 0)
-        return jogador1
-    return jogador1 == 'X' ? 'O' : 'X';
+function jogadorAtual(firstPlayer){
+    if(partida % 2 == 0){
+        nom_jogador_atual = $(`#${firstPlayer}`).val();
+        return firstPlayer
+    }
+    firstPlayer = firstPlayer == 'X' ? 'O' : 'X';
+    nom_jogador_atual = $(`#${firstPlayer}`).val();
+    return firstPlayer
 }
 
+
+function verificaNomeJogadores(){
+    if(!$('#X').val().trim().length){
+        alert('Necessário preencher o nome do Jogador 1.');
+        return false
+    }
+    if(!$('#O').val().trim().length){
+        alert('Necessário preencher o nome do Jogador 2.');
+        return false
+    }
+    return true
+}
+
+
 function comecaJogada(){
+    if(!verificaNomeJogadores())
+        return
+
     partida = 0;
-    $('#bt_iniciar').css('display', 'none');
+    $('#configuracoes_iniciais').css('display', 'none');
     $('#tabuleiro, #menu').css('display', 'flex');
     $('#tabuleiro tr td').removeClass().css("pointer-events", "auto");
 
@@ -19,26 +41,29 @@ function comecaJogada(){
         type:'POST',
     }).done((retorno) => {
         id_partida = retorno.id;
-        jogador1 = retorno.firstPlayer;
+        firstPlayer = retorno.firstPlayer;
 
         $('.id_jogo').html(id_partida);
-        $('.jogador_atual').html(jogador1);
+        $('.jogador_atual').html($(`#${firstPlayer}`).val());
 
     }).fail((retorno) => {
         alert('Falha ao iniciar partida, tente novamente!');
     });
 }
 
+
 function marcaJogada(jObj, player){
     partida++;
+    jogadorAtual(firstPlayer);
     classeQuadro = player == 'X' ? 'marcaX' : 'marcaO';
-    $('.jogador_atual').html(player == 'X' ? 'O' : 'X');
+    $('.jogador_atual').html(nom_jogador_atual);
     jObj.css("pointer-events", "none").addClass(classeQuadro);
 }
 
+
 function realizaJogada(obj){
     const jObj = $(obj);
-    const player = jogadorAtual(jogador1);
+    const player = jogadorAtual(firstPlayer);
 
     data = {
         'id': id_partida,
@@ -63,7 +88,7 @@ function realizaJogada(obj){
             if(vencedor == 'Draw')
                 mensagem = 'Jogo finalizou em Empate!';
             else
-                mensagem = `Jogador ${vencedor} ganhou o jogo`;
+                mensagem = `Jogador ${$(`#${vencedor}`).val().toUpperCase()} ganhou o jogo`;
 
             if(confirm(`${mensagem}. Deseja iniciar uma nova partida?`))
                 comecaJogada();
