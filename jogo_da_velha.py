@@ -44,7 +44,7 @@ class JogoDaVelha():
 
         ganhador = self.status_jogo(x, y)
         if not ganhador:
-            return False
+            return {'status': 'Aguardando próxima jogada.'}
 
         if ganhador == 3:
             ganhador = 'X'

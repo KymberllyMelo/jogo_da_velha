@@ -68,7 +68,7 @@ function realizaJogada(obj){
             if(confirm(`${mensagem}. Deseja iniciar uma nova partida?`))
                 comecaJogada();
             else
-                return
+                $('#tabuleiro tr td').css("pointer-events", "none");
         }
 
     }).fail((retorno) => {
