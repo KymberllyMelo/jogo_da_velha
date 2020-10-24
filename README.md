@@ -6,6 +6,8 @@ Necessário ter instalado no computador o Python 3.6 (https://www.python.org/dow
 
 
 
+*Os passos a seguir devem ser executados em um terminal*
+
 Após a instalação do Python, utilizar o pip (gerenciador de pacotes do Python) para instalar o pacote `virtualenv` para criarmos um ambiente virtual:
 
 `pip install virtualenv`
